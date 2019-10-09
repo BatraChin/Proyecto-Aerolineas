@@ -61,7 +61,6 @@ public class Inicio {
 			public void actionPerformed(ActionEvent e) {
 				JFrame loginEmpleado = new ventanaLoginEmpleado();
 				loginEmpleado.setVisible(true);
-				frame.disable();
 				
 			}
 		});
