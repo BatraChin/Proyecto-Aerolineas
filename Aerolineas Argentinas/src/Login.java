@@ -134,7 +134,7 @@ public class Login extends JFrame {
 				if (rdbtnConsutlassql.isSelected())
 				{
 					System.out.println(passwordField.getText());
-					if (dbVuelos.conectarBD(textField.getText(), passwordField.getText()))
+					if (dbVuelos.conectarBD("admin", "admin"))
 					{
 
 						System.out.println(passwordField.getText());
