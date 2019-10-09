@@ -77,29 +77,30 @@ public class ventanaLoginAdmin extends JFrame {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				password= "";
-				char[] p=passwordField.getPassword();
-	            for(char s:p)
-	               password=password+s;
-	            String aux=MD5(password);
-	            password=aux;
 				
-				
-				System.out.println(passwordField.getText());
-				if (dbVuelos.conectarBD("admin", "admin"))
-				{
-
+					password= "";
+					char[] p=passwordField.getPassword();
+		            for(char s:p)
+		               password=password+s;
+		            String aux=MD5(password);
+		            password=aux;
+					
+					
 					System.out.println(passwordField.getText());
-						SQLGUI consultasSQL=new SQLGUI(dbVuelos,panelContent);
-						textField.setText("");
-						passwordField.setText("");
-						setVisible(false);
-				}
-				else 
-					JOptionPane.showMessageDialog(null, "Usuario o password incorrecto", "Error",
-	                    JOptionPane.ERROR_MESSAGE);
-				
-				
+					if (dbVuelos.conectarBD("admin", "admin"))
+					{
+	
+						System.out.println(passwordField.getText());
+							SQLGUI consultasSQL=new SQLGUI(dbVuelos,panelContent);
+							textField.setText("");
+							passwordField.setText("");
+							setVisible(false);
+					}
+					else 
+						JOptionPane.showMessageDialog(null, "Usuario o password incorrecto", "Error",
+		                    JOptionPane.ERROR_MESSAGE);
+					
+					
 			}
 		});
 		btnConfirmar.setBounds(205, 172, 89, 23);
