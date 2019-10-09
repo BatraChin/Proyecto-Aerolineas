@@ -11,12 +11,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ventanaLoginAdmin extends JFrame {
+public class ventanaLoginEmpleado extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JPasswordField pwdContrasea;
-	private static ventanaLoginAdmin frame = new ventanaLoginAdmin();
+	private static ventanaLoginEmpleado frame;
 
 	/**
 	 * Launch the application.
@@ -25,7 +25,7 @@ public class ventanaLoginAdmin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new ventanaLoginAdmin();
+					frame = new ventanaLoginEmpleado();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,12 +37,11 @@ public class ventanaLoginAdmin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ventanaLoginAdmin() {
+	public ventanaLoginEmpleado() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		frame.setTitle("LOGIN EMPLEADO");
 		contentPane = new JPanel();
-		frame.setTitle("LOGIN ADMINISTRADOR");
-
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

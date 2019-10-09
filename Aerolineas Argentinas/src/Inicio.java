@@ -47,9 +47,8 @@ public class Inicio {
 		btnAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				JFrame ventanaLoginAdmin = new JFrame();
-				ventanaLoginAdmin.setVisible(true);
-				ventanaLoginAdmin.setBounds(100,100,400,250);
+				JFrame loginAdmin = new ventanaLoginAdmin();
+				loginAdmin.setVisible(true);
 				
 				
 			}
@@ -58,6 +57,14 @@ public class Inicio {
 		frame.getContentPane().add(btnAdministrador);
 		
 		JButton btnEmpleado = new JButton("Empleado");
+		btnEmpleado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame loginEmpleado = new ventanaLoginEmpleado();
+				loginEmpleado.setVisible(true);
+				frame.disable();
+				
+			}
+		});
 		btnEmpleado.setBounds(10, 83, 144, 43);
 		frame.getContentPane().add(btnEmpleado);
 	}
