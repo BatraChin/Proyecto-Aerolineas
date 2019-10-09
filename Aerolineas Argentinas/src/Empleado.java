@@ -32,6 +32,8 @@ public class Empleado {
 		initialize();
 	}
 
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -40,6 +42,7 @@ public class Empleado {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		//esto hay que comentarlo aca
 		
 		JRadioButton rdbtnIda = new JRadioButton("Ida");
 		rdbtnIda.setBounds(57, 39, 109, 23);
