@@ -35,7 +35,7 @@ import javax.swing.border.BevelBorder;
 
 import quick.dbtable.*;
 
-public class SQLGUI extends javax.swing.JInternalFrame {
+public class ConsultaSQL extends javax.swing.JInternalFrame {
 
 	
 	   protected Connection conexionBD = null;
@@ -59,7 +59,7 @@ public class SQLGUI extends javax.swing.JInternalFrame {
 	   private int controlUpdate;
 		
 		
-	   public SQLGUI(VuelosConexion dbV , JFrame frame) 
+	   public ConsultaSQL(VuelosConexion dbV , JFrame frame) 
 	   {
 		  
 	      super();

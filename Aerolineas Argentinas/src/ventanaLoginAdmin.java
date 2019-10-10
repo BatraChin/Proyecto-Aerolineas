@@ -91,7 +91,7 @@ public class ventanaLoginAdmin extends JFrame {
 					{
 	
 						System.out.println(passwordField.getText());
-							SQLGUI consultasSQL=new SQLGUI(dbVuelos,panelContent);
+							ConsultaSQL consultasSQL=new ConsultaSQL(dbVuelos,panelContent);
 							textField.setText("");
 							passwordField.setText("");
 							setVisible(false);

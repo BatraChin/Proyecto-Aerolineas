@@ -54,7 +54,6 @@ public class ReservasGUI {
 	private JPanel panelClaseVueloVuelta;
 	private JPanel panelUsuarios;
 	private JPanel panelUsuariosDisponibles;
-	private JButton btnAgregarUsuario;
 	private JButton btnReservar;
 	private JLabel lblNewLabel_3;
 	private JScrollPane scrollPaneVueloIda;
@@ -264,12 +263,6 @@ public class ReservasGUI {
 		tableUsuarios.setAutoCreateRowSorter(true);
 		m.refrescarTabla("select * from pasajeros", tableUsuarios,v);
 		
-		btnAgregarUsuario = new JButton("Agregar usuario");
-		btnAgregarUsuario.setBounds(706, 58, 123, 23);
-		panelUsuarios.add(btnAgregarUsuario);
-		OyenteUsuarios o = new OyenteUsuarios();
-		btnAgregarUsuario.addActionListener(o);
-		
 		btnReservar = new JButton("Reservar");
 		btnReservar.setBounds(265, 506, 89, 23);
 		frame.getContentPane().add(btnReservar);
@@ -360,16 +353,6 @@ public class ReservasGUI {
 			
 		}
 	}
-	
-	private class OyenteUsuarios implements ActionListener
-	   {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			new addUserGUI(v, tableUsuarios);
-		}
-		   
-	   }
 	
 			private java.sql.Date pasarFechas(String f) {
 				String mensajeError=null;
