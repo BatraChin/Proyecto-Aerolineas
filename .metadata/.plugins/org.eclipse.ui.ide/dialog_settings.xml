@@ -18,6 +18,7 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\guill\Desktop\ejemplo java-MySQL"/>
 			<item value="D:\Universidad\bases\Fran 2016\Proyecto 3\Proyecto 3 tin"/>
 			<item value="D:\Universidad\bases\Fran 2016\Proyecto 3\Proyecto 3 vFinal"/>
 			<item value="D:\Universidad\bases\Fran 2016\Proyecto 3\Proyecto 3 vFinal 2.0"/>

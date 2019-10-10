@@ -26,7 +26,6 @@ public class ventanaLoginEmpleado extends JFrame {
 	private VuelosConexion dbVuelos;
 	private String password;
 	private JFrame panelContent;
-	private JTextField textField;
 
 	
 
@@ -95,7 +94,6 @@ public class ventanaLoginEmpleado extends JFrame {
 				{
 						ReservasGUI reservas = new ReservasGUI(dbVuelos, panelContent, 100000); 
 								//Integer.parseInt(textField.getText()));
-						textField.setText("");
 						passwordField.setText("");
 						setVisible(false);
 				}
