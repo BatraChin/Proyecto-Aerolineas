@@ -34,6 +34,7 @@ public class ventanaLoginEmpleado extends JFrame {
 	 * Create the frame.
 	 */
 	public ventanaLoginEmpleado() {
+		dbVuelos = new VuelosConexion();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setTitle("LOGIN EMPLEADO");
