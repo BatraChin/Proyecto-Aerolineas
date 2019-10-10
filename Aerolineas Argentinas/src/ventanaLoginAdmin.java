@@ -89,11 +89,11 @@ public class ventanaLoginAdmin extends JFrame {
 		            password=aux;
 					
 					
-					System.out.println(passwordField.getText());
+					//System.out.println(passwordField.getText());
 					if (dbVuelos.conectarBD("admin", "admin"))
 					{
 	
-						System.out.println(passwordField.getText());
+						//System.out.println(passwordField.getText());
 							ConsultaSQL consultasSQL=new ConsultaSQL(dbVuelos,panelContent);
 							textField.setText("");
 							passwordField.setText("");
