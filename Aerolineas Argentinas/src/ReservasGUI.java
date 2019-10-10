@@ -33,7 +33,6 @@ public class ReservasGUI {
 	private JTable tableClasesIda;
 	private JTable tableVuelosVuelta;
 	private JTable tableClasesVuelta;
-	private JTable tableUsuarios;
 	
 	private int legajo;
 	private VuelosConexion v;
@@ -52,15 +51,11 @@ public class ReservasGUI {
 	private JPanel panelVuelta;
 	private JPanel panelVueloVuelta;
 	private JPanel panelClaseVueloVuelta;
-	private JPanel panelUsuarios;
-	private JPanel panelUsuariosDisponibles;
-	private JButton btnReservar;
 	private JLabel lblNewLabel_3;
 	private JScrollPane scrollPaneVueloIda;
 	private JScrollPane scrollPaneVueloVuelta;
 	private JScrollPane scrollPaneClaseVueloIda;
 	private JScrollPane scrollPaneClaseVueloVuelta;
-	private JScrollPane scrollPaneUsuarios;
 	private JButton btnVolverAlInicio;
 	private JFrame prev;
 
@@ -82,33 +77,33 @@ public class ReservasGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 877, 576);
+		frame.setBounds(100, 100, 878, 612);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
 		frame.setVisible(true);
 		
 		panelLugarFecha = new Panel();
-		panelLugarFecha.setBounds(10, 10, 839, 46);
+		panelLugarFecha.setBounds(10, 10, 839, 100);
 		frame.getContentPane().add(panelLugarFecha);
 		panelLugarFecha.setLayout(null);
 		panelLugarFecha.setVisible(true);
 		
 		lblNewLabel = new JLabel("Origen");
-		lblNewLabel.setBounds(10, 17, 46, 14);
+		lblNewLabel.setBounds(87, 20, 46, 14);
 		panelLugarFecha.add(lblNewLabel);
 		
 		origenTextField = new JTextField();
-		origenTextField.setBounds(54, 14, 86, 20);
+		origenTextField.setBounds(131, 17, 86, 20);
 		panelLugarFecha.add(origenTextField);
 		origenTextField.setColumns(10);
 		
 		lblNewLabel_1 = new JLabel("Destino");
-		lblNewLabel_1.setBounds(150, 17, 46, 14);
+		lblNewLabel_1.setBounds(246, 20, 46, 14);
 		panelLugarFecha.add(lblNewLabel_1);
 		
 		destinoTextField = new JTextField();
-		destinoTextField.setBounds(196, 14, 86, 20);
+		destinoTextField.setBounds(302, 17, 86, 20);
 		panelLugarFecha.add(destinoTextField);
 		destinoTextField.setColumns(10);
 		
@@ -127,7 +122,7 @@ public class ReservasGUI {
 				fechaVuelta.setVisible(false);
 			}
 		});
-		idaRadioButton.setBounds(288, 14, 46, 23);
+		idaRadioButton.setBounds(431, 16, 46, 23);
 		panelLugarFecha.add(idaRadioButton);		
 		idaRadioButton.setSelected(true);
 		
@@ -146,40 +141,40 @@ public class ReservasGUI {
 				fechaVuelta.setVisible(true);
 			}
 		});
-		idaVueltaRadioButton.setBounds(336, 14, 97, 23);
+		idaVueltaRadioButton.setBounds(496, 16, 97, 23);
 		panelLugarFecha.add(idaVueltaRadioButton);
 		
 		
 		JLabel lblNewLabel_2 = new JLabel("Fecha ida:");
-		lblNewLabel_2.setBounds(483, 3, 57, 14);
+		lblNewLabel_2.setBounds(87, 58, 57, 14);
 		panelLugarFecha.add(lblNewLabel_2);
 		
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		fechaIda = new JFormattedTextField(format);
 		fechaIda.setText("##/##/####");
-		fechaIda.setBounds(550, 0, 81, 20);
+		fechaIda.setBounds(141, 55, 81, 20);
 		panelLugarFecha.add(fechaIda);
 		
 		lblNewLabel_3 = new JLabel("Fecha vuelta:");
-		lblNewLabel_3.setBounds(475, 30, 81, 14);
+		lblNewLabel_3.setBounds(227, 58, 81, 14);
 		panelLugarFecha.add(lblNewLabel_3);
 		lblNewLabel_3.setVisible(false);
 		
 		fechaVuelta = new JFormattedTextField();
 		fechaVuelta.setText("##/##/####");
-		fechaVuelta.setBounds(550, 27, 81, 20);
+		fechaVuelta.setBounds(302, 55, 81, 20);
 		fechaVuelta.setVisible(false);
 		panelLugarFecha.add(fechaVuelta);
 		
 		JButton btnBuscar = new JButton("Buscar");
 
-		btnBuscar.setBounds(667, 13, 162, 23);
+		btnBuscar.setBounds(622, 38, 162, 23);
 		panelLugarFecha.add(btnBuscar);
 		OyenteBuscar ob= new OyenteBuscar();
 		btnBuscar.addActionListener(ob);
 		
 		panelIda = new JPanel();
-		panelIda.setBounds(10, 62, 839, 137);
+		panelIda.setBounds(10, 144, 839, 137);
 		frame.getContentPane().add(panelIda);
 		panelIda.setLayout(null);
 		
@@ -213,7 +208,7 @@ public class ReservasGUI {
 		
 		
 		panelVuelta = new JPanel();
-		panelVuelta.setBounds(10, 210, 839, 137);
+		panelVuelta.setBounds(10, 310, 839, 137);
 		frame.getContentPane().add(panelVuelta);
 		panelVuelta.setLayout(null);
 		panelVuelta.setVisible(true);
@@ -244,34 +239,17 @@ public class ReservasGUI {
 		tableClasesVuelta = new JTable();
 		panelClaseVueloVuelta.add(tableClasesVuelta);
 		
-		panelUsuarios = new JPanel();
-		panelUsuarios.setBounds(10, 358, 839, 137);
-		panelUsuarios.setVisible(true);
-		frame.getContentPane().add(panelUsuarios);
-		panelUsuarios.setLayout(null);
-		
-		scrollPaneUsuarios = new JScrollPane();
-		scrollPaneUsuarios.setBounds(10, 11, 686, 115);
-		panelUsuarios.add(scrollPaneUsuarios);
-		
-		panelUsuariosDisponibles = new JPanel();
-		scrollPaneUsuarios.setViewportView(panelUsuariosDisponibles);
-		panelUsuariosDisponibles.setVisible(true);
-		
-		tableUsuarios = new JTable();
-		panelUsuariosDisponibles.add(tableUsuarios);
-		tableUsuarios.setAutoCreateRowSorter(true);
-		m.refrescarTabla("select * from pasajeros", tableUsuarios,v);
-		
-		btnReservar = new JButton("Reservar");
-		btnReservar.setBounds(265, 506, 89, 23);
-		frame.getContentPane().add(btnReservar);
-		OyenteReservar ore = new OyenteReservar();
-		btnReservar.addActionListener(ore);
-		
 		btnVolverAlInicio = new JButton("Volver al inicio");
-		btnVolverAlInicio.setBounds(371, 506, 133, 23);
+		btnVolverAlInicio.setBounds(370, 492, 133, 23);
 		frame.getContentPane().add(btnVolverAlInicio);
+		
+		JLabel lblVueloDeIda = new JLabel("Vuelo de Ida");
+		lblVueloDeIda.setBounds(27, 132, 75, 14);
+		frame.getContentPane().add(lblVueloDeIda);
+		
+		JLabel lblVueloDeVuelta = new JLabel("Vuelo de Vuelta");
+		lblVueloDeVuelta.setBounds(31, 296, 97, 14);
+		frame.getContentPane().add(lblVueloDeVuelta);
 		OyenteRegresar or= new OyenteRegresar(this.frame);
 		btnVolverAlInicio.addActionListener(or);
 	}
@@ -475,138 +453,6 @@ public class ReservasGUI {
 					// TODO Auto-generated method stub
 					
 				}
-			}
-				
-				private class OyenteReservar implements ActionListener
-				   {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						//Obtiene las filas seleccionadas
-						int rowIda,rowClaseIda, rowVuelta, rowClaseVuelta, rowPasajero;
-						rowIda = tableVuelosIda.getSelectedRow();
-						rowClaseIda = tableClasesIda.getSelectedRow();
-						rowPasajero = tableUsuarios.getSelectedRow();
-						if (rowIda==-1 || rowClaseIda==-1 || rowPasajero==-1)
-						{
-							JOptionPane.showMessageDialog(new JFrame(),
-			                        "Falta seleccionar algun parámetro\n", 
-			                        "Error",
-			                        JOptionPane.ERROR_MESSAGE);
-						}
-						else 
-						{
-							CallableStatement cs = null;
-							if (idaRadioButton.isSelected())
-							{//Lleva a cabo el stored procedure
-								try {
-									
-									System.out.println(" ");
-									cs = v.getConexionBD().prepareCall("{ call reservarVueloIda(?,?,?,?,?,?,?)}");
-									cs.setString(1,(String)tableVuelosIda.getValueAt(rowIda,0));
-									System.out.println(tableVuelosIda.getValueAt(rowIda,0));
-									cs.setString(2,(String)tableClasesIda.getValueAt(rowClaseIda,0));
-									System.out.println(tableClasesIda.getValueAt(rowClaseIda,0));
-									
-									cs.setDate(3,pasarFechas(fechaIda.getText()));
-									System.out.println(pasarFechas(fechaIda.getText()));
-									
-									cs.setString(4,(String)tableUsuarios.getValueAt(rowPasajero,0));
-									System.out.println(tableUsuarios.getValueAt(rowPasajero,0));
-									
-									cs.setLong(5,(Long)tableUsuarios.getValueAt(rowPasajero,1));
-									System.out.println(tableUsuarios.getValueAt(rowPasajero,1));
-									
-									cs.setInt(6,legajo);
-									System.out.println(legajo);
-
-									System.out.println("FIN ");
-									cs.registerOutParameter(7, Types.VARCHAR);
-									
-									cs.execute();					
-										JOptionPane.showMessageDialog(null, cs.getString(7),"Información"
-												, JOptionPane.INFORMATION_MESSAGE);
-								} catch (SQLException e1) {
-									e1.printStackTrace();
-									System.out.println( e1.getMessage());
-									JOptionPane.showMessageDialog(new JFrame(),
-											  
-					                        "No se pudo realizar la operacion\n", 
-					                        "Error",
-					                        JOptionPane.ERROR_MESSAGE);
-								}
-							}
-							else
-							{
-								//Ejecuta Stored procedure
-								try {
-									rowVuelta = tableVuelosVuelta.getSelectedRow();
-									rowClaseVuelta = tableClasesVuelta.getSelectedRow();
-									if (rowVuelta==-1 || rowClaseVuelta==-1 )
-									{
-										JOptionPane.showMessageDialog(new JFrame(),
-						                        "Falta seleccionar algun parámetro\n", 
-						                        "Error",
-						                        JOptionPane.ERROR_MESSAGE);
-									}
-									else{
-											cs = v.getConexionBD().prepareCall("{ call reservarVueloIdaVuelta(?,?,?,?,?,?,?,?,?,?)}");
-											cs.setString(1,(String)tableVuelosIda.getValueAt(rowIda,0));
-											System.out.println(tableVuelosIda.getValueAt(rowIda,0));
-											cs.setString(2,(String)tableVuelosVuelta.getValueAt(rowVuelta,0));
-											System.out.println(tableVuelosVuelta.getValueAt(rowVuelta,0));
-											cs.setString(3,(String)tableClasesIda.getValueAt(rowClaseIda,0));
-											System.out.println(tableClasesIda.getValueAt(rowClaseIda,0));
-											cs.setString(4,(String)tableClasesVuelta.getValueAt(rowClaseVuelta,0));
-											System.out.println(tableClasesVuelta.getValueAt(rowClaseVuelta,0));
-											cs.setDate(5,pasarFechas(fechaIda.getText()));
-											System.out.println(fechaIda.getText());
-											cs.setDate(6,pasarFechas(fechaVuelta.getText()));
-											System.out.println(fechaVuelta.getText());
-											cs.setString(7,(String)tableUsuarios.getValueAt(rowPasajero,0));
-											System.out.println(tableUsuarios.getValueAt(rowPasajero,0));
-											cs.setLong(8,(Long)tableUsuarios.getValueAt(rowPasajero,1));
-											System.out.println(tableUsuarios.getValueAt(rowPasajero,1));
-											cs.setInt(9,legajo);
-											
-											cs.registerOutParameter(10, Types.VARCHAR);
-											cs.execute();					
-												JOptionPane.showMessageDialog(null, cs.getString(10),"Información"
-														, JOptionPane.INFORMATION_MESSAGE);
-												//Actualizo las tablas que se modificaron
-												String numero=(String) tableVuelosVuelta.getValueAt(rowVuelta,0);
-									        	String salida= (String) tableVuelosVuelta.getValueAt(rowVuelta,6);
-									        	Time h_salida= (Time) tableVuelosVuelta.getValueAt(rowVuelta,3);
-									        	String llegada=(String) tableVuelosVuelta.getValueAt(rowVuelta,8);
-									        	Time h_llegada= (Time) tableVuelosVuelta.getValueAt(rowVuelta,4);
-									        	String modelo=(String) tableVuelosVuelta.getValueAt(rowVuelta,1);
-									        	//Muestra los datos de un determinado vuelo
-									        	m.refrescarTabla("SELECT DISTINCT CLASE,DISPONIBLES,PRECIO FROM VUELOS_DISPONIBLES WHERE VUELO='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesVuelta,v);
-									}
-								} catch (SQLException e1) {
-									e1.printStackTrace();
-									JOptionPane.showMessageDialog(new JFrame(),
-					                        "No se pudo realizar la operacion\n", 
-					                        "Error",
-					                        JOptionPane.ERROR_MESSAGE);
-								}
-							
-							
-							}
-							//Actualizo las tablas que se modificaron
-							String numero=(String) tableVuelosIda.getValueAt(rowIda,0);
-				        	String salida= (String) tableVuelosIda.getValueAt(rowIda,6);
-				        	Time h_salida= (Time) tableVuelosIda.getValueAt(rowIda,3);
-				        	String llegada=(String) tableVuelosIda.getValueAt(rowIda,8);
-				        	Time h_llegada= (Time) tableVuelosIda.getValueAt(rowIda,4);
-				        	String modelo=(String) tableVuelosIda.getValueAt(rowIda,1);
-				        	m.refrescarTabla("SELECT DISTINCT CLASE,DISPONIBLES,PRECIO FROM VUELOS_DISPONIBLES WHERE VUELO='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesIda,v);}
-						
-					}
-					
-					
-   
-				
 			}
 				
 				 private class OyenteRegresar implements ActionListener

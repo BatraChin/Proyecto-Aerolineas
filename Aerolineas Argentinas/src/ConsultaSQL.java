@@ -33,7 +33,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 
-import quick.dbtable.*;
+import quick.dbtable.DBTable;
 
 public class ConsultaSQL extends javax.swing.JInternalFrame {
 
