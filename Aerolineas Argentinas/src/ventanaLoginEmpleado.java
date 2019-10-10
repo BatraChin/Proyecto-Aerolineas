@@ -35,6 +35,9 @@ public class ventanaLoginEmpleado extends JFrame {
 	 */
 	public ventanaLoginEmpleado() {
 		dbVuelos = new VuelosConexion();
+		
+	
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setTitle("LOGIN EMPLEADO");
@@ -74,6 +77,7 @@ public class ventanaLoginEmpleado extends JFrame {
 		contentPane.add(btnCancelar);
 		
 		JButton btnConfirmar = new JButton("CONFIRMAR");
+		
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -84,7 +88,7 @@ public class ventanaLoginEmpleado extends JFrame {
 	            String aux=MD5(password);
 	            password=aux;
 				
-				if (dbVuelos.conectarBDempleado(Integer.parseInt(textField.getText()), password))
+				if (dbVuelos.conectarBDempleado(Integer.parseInt(txtUsuario.getText()), password))
 				{
 						ReservasGUI reservas = new ReservasGUI(dbVuelos, panelContent, Integer.parseInt(textField.getText()));
 						textField.setText("");

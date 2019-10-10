@@ -20,7 +20,8 @@ public VuelosConexion(){
 	String driver ="com.mysql.jdbc.Driver";
 	servidor = "localhost:3306";
     baseDatos = "vuelos";
-    uriConexion = "jdbc:mysql://" + servidor + "/" + baseDatos +"?noAccessToProcedureBodies=true";
+    uriConexion = /*"jdbc:mysql://" + servidor + "/" + baseDatos +"?noAccessToProcedureBodies=true"*/"jdbc:mysql://" + servidor + "/" + 
+            baseDatos +"?serverTimezone=America/Argentina/Buenos_Aires";
 } 
 
 
@@ -28,14 +29,14 @@ public boolean conectarBD(String usuario,String clave)
 	   {
 	      if (this.conexionBD == null)
 	      {
-	         try
+	        /* try
 	         {
 	            Class.forName("com.mysql.jdbc.Driver").newInstance();
 	         }
 	         catch (Exception ex)
 	         {
 	            System.out.println(ex.getMessage());
-	         }
+	         }*/
 	   
 	         try
 	         {
