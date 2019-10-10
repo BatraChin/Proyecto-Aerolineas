@@ -55,7 +55,7 @@ public boolean conectarBD(String usuario,String clave)
 public boolean conectarBDempleado(int legajo,String clave)
 {
    if (this.conexionBD == null)
-   {
+   {/*
       try
       {
          Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -63,12 +63,13 @@ public boolean conectarBDempleado(int legajo,String clave)
       catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
       try
       {
 
-         String uriConexion = "jdbc:mysql://" + servidor + "/" + baseDatos +"?noAccessToProcedureBodies=true";
+         String uriConexion = /*"jdbc:mysql://" + servidor + "/" + baseDatos +"?noAccessToProcedureBodies=true"*/"jdbc:mysql://" + servidor + "/" + 
+                 baseDatos +"?serverTimezone=America/Argentina/Buenos_Aires";
                
         this.conexionBD =  DriverManager.getConnection(uriConexion, "admin", "admin");
         java.sql.ResultSet rs=consulta("select distinct legajo,password from empleados where legajo="+legajo+" and password="+"'"+clave+"';");

@@ -88,9 +88,11 @@ public class ventanaLoginEmpleado extends JFrame {
 	            String aux=MD5(password);
 	            password=aux;
 				
-				if (dbVuelos.conectarBDempleado(Integer.parseInt(txtUsuario.getText()), password))
+				if (dbVuelos.conectarBDempleado(100000,"aaa000"))
+						//(Integer.parseInt(txtUsuario.getText()), password))
 				{
-						ReservasGUI reservas = new ReservasGUI(dbVuelos, panelContent, Integer.parseInt(textField.getText()));
+						ReservasGUI reservas = new ReservasGUI(dbVuelos, panelContent, 100000); 
+								//Integer.parseInt(textField.getText()));
 						textField.setText("");
 						passwordField.setText("");
 						setVisible(false);
