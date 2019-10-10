@@ -1,12 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -16,21 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 import quick.dbtable.DBTable;
@@ -48,7 +30,6 @@ public class ConsultaSQL extends javax.swing.JInternalFrame {
 	   private JScrollPane scroll;
 	   private JPanel pnlTablas;
 	   private JList listaTablas;
-	   private JPanel MuestroTabla;// panel donde muestro la tabla
 	   private DBTable muestro; //tabla a mostrar
 	   private TextArea muestro2;
 	   private VuelosConexion dbVuelos;
@@ -63,9 +44,11 @@ public class ConsultaSQL extends javax.swing.JInternalFrame {
 	   {
 		  
 	      super();
-	      initGUI();
 	      dbVuelos = dbV;
-	      panelContent = frame;
+	      panelContent= new JFrame();
+	      panelContent = frame;	      
+	      initGUI();
+	      
 	   }
 	   
 	   private void initGUI() 
@@ -135,7 +118,8 @@ public class ConsultaSQL extends javax.swing.JInternalFrame {
 		       		pnlConsulta.add(btnVolverAlInicio);
 		       		OyenteRegresar or= new OyenteRegresar(this.frame);
 		       		btnVolverAlInicio.addActionListener(or);
-		        }
+		       		
+	            }
   
 	        	tabla = new DBTable();
 	        	muestro = new DBTable();
@@ -284,64 +268,17 @@ public class ConsultaSQL extends javax.swing.JInternalFrame {
 	      
 	   }
 	
-	
-	//No la uso, pero la dejo porque puede ser util :)
-	   private void refrescarTabla2()
-	   {
-	      try
-	      {    
-	    	  // seteamos la consulta a partir de la cual se obtendrán los datos para llenar la tabla
-	    	  muestro.setSelectSql(this.txtConsulta.getText().trim());
-
-	    	  // obtenemos el modelo de la tabla a partir de la consulta para 
-	    	  // modificar la forma en que se muestran de algunas columnas  
-	    	  muestro.createColumnModelFromQuery();    	    
-	    	  for (int i = 0; i < tabla.getColumnCount(); i++)
-	    	  { // para que muestre correctamente los valores de tipo TIME (hora)  		   		  
-	    		 if	 (muestro.getColumn(i).getType()==Types.TIME)  
-	    		 {    		 
-	    		  muestro.getColumn(i).setType(Types.CHAR);  
-	  	       	 }
-	    		 // cambiar el formato en que se muestran los valores de tipo DATE
-	    		 if	 (muestro.getColumn(i).getType()==Types.DATE)
-	    		 {
-	    		    muestro.getColumn(i).setDateFormat("dd/MM/YYYY");
-	    		 }
-	          }  
-	    	  // actualizamos el contenido de la tabla.   	     	  
-	    	  muestro.refresh();
-	    	  // No es necesario establecer  una conexión, crear una sentencia y recuperar el 
-	    	  // resultado en un resultSet, esto lo hace automáticamente la tabla (DBTable) a 
-	    	  // patir  de  la conexión y la consulta seteadas con connectDatabase() y setSelectSql() respectivamente.
-	          
-	    	  
-	    	  
-	       }
-	      catch (SQLException ex)
-	      {
-	         // en caso de error, se muestra la causa en la consola
-	         System.out.println("SQLException: " + ex.getMessage());
-	         System.out.println("SQLState: " + ex.getSQLState());
-	         System.out.println("VendorError: " + ex.getErrorCode());
-	         JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this),
-	                                       ex.getMessage() + "\n", 
-	                                       "Error al ejecutar la consulta.",
-	                                       JOptionPane.ERROR_MESSAGE);
-	         
-	      }
-	      
-	   }
 	   
 	   protected void showTables()
 	   {
 		   try
 		      {    
 
-			   String driver ="com.mysql.jdbc.Driver";
+			   
 	           String servidor = "localhost:3306";
 	           String baseDatos = "vuelos";
 	           String uriConexion = "jdbc:mysql://" + servidor + "/" + baseDatos;
-			   conexionBD = DriverManager.getConnection ("jdbc:mysql://"+servidor+ "/" +baseDatos,"admin", "admin");
+			   conexionBD = DriverManager.getConnection (uriConexion,"admin", "admin");
 			   System.out.println(conexionBD);
 	           if (conexionBD != null) {
 	        	   System.out.println("Conexion exitosa!");
@@ -453,12 +390,11 @@ public class ConsultaSQL extends javax.swing.JInternalFrame {
 		   	   pnlTablas.remove(scroll);
 		   	   scroll = null;
 		   	   muestro2.setVisible(false);
-			   String driver ="com.mysql.jdbc.Driver";
 	           String servidor = "localhost:3306";
 	           String baseDatos = "vuelos";
 	           String uriConexion = "jdbc:mysql://" + servidor + "/" + baseDatos;
 			  try{ 
-	           conexionBD = DriverManager.getConnection ("jdbc:mysql://"+servidor+ "/" +baseDatos,"admin", "admin");
+	           conexionBD = DriverManager.getConnection (uriConexion,"admin", "admin");
 	//		   conexionBD = dbVuelos.getConexionBD();
 			   System.out.println(conexionBD);
 	           if (conexionBD != null) {

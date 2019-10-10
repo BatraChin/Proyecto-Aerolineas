@@ -1,5 +1,4 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -78,31 +77,38 @@ public class ventanaLoginAdmin extends JFrame {
 		
 		JButton btnConfirmar = new JButton("CONFIRMAR");
 		btnConfirmar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
-				
-				
-					password= "";
-					char[] p=passwordField.getPassword();
-		            for(char s:p)
-		               password=password+s;
-		            String aux=MD5(password);
-		            password=aux;
 					
+				
+				password= "";
+				char[] p=passwordField.getPassword();
+	            for(char s:p)
+	               password=password+s;
+	            
+	            
+				if (!password.equals("admin") || !txtUsuario.getText().equals("admin"))
+						{JOptionPane.showMessageDialog(null, "Usuario o password incorrecto", "Error",
+			                    JOptionPane.ERROR_MESSAGE);
+						txtUsuario.setText("");
+						passwordField.setText("");}
+				else
+				   {
 					
-					//System.out.println(passwordField.getText());
-					if (dbVuelos.conectarBD("admin", "admin"))
+					System.out.print("password correcto");
+					if (dbVuelos.conectarBD(txtUsuario.getText(), password))
 					{
 	
-						//System.out.println(passwordField.getText());
 							ConsultaSQL consultasSQL=new ConsultaSQL(dbVuelos,panelContent);
 							txtUsuario.setText("");
 							passwordField.setText("");
 							setVisible(false);
 					}
-					else 
+					/*else 
 						JOptionPane.showMessageDialog(null, "Usuario o password incorrecto", "Error",
 		                    JOptionPane.ERROR_MESSAGE);
-					
+				   */
+				   }
 					
 			}
 		});
