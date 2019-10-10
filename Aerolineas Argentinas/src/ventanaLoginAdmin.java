@@ -91,11 +91,12 @@ public class ventanaLoginAdmin extends JFrame {
 						{JOptionPane.showMessageDialog(null, "Usuario o password incorrecto", "Error",
 			                    JOptionPane.ERROR_MESSAGE);
 						txtUsuario.setText("");
-						passwordField.setText("");}
+						passwordField.setText("");
+						}
 				else
 				   {
-					
 					System.out.print("password correcto");
+					
 					if (dbVuelos.conectarBD(txtUsuario.getText(), password))
 					{
 	

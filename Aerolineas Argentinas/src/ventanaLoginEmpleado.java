@@ -87,8 +87,10 @@ public class ventanaLoginEmpleado extends JFrame {
 	               password=password+s;
 	            String aux=MD5(password);
 	            password=aux;
-				
-				if (dbVuelos.conectarBDempleado(100000,"aaa000"))
+	            System.out.println(password);
+				Integer leg= Integer.parseInt(txtUsuario.getText());
+				System.out.println(leg);
+				if (dbVuelos.conectarBDempleado(Integer.parseInt(txtUsuario.getText()),"aaa000"))
 						//(Integer.parseInt(txtUsuario.getText()), password))
 				{
 						ReservasGUI reservas = new ReservasGUI(dbVuelos, panelContent, 100000); 
@@ -97,10 +99,10 @@ public class ventanaLoginEmpleado extends JFrame {
 						passwordField.setText("");
 						setVisible(false);
 				}
-				else 
+				else { System.out.println("else");
 					JOptionPane.showMessageDialog(null, "Usuario o password incorrecto", "Error",
 	                    JOptionPane.ERROR_MESSAGE);
-				
+				}
 			}
 		});
 		btnConfirmar.setBounds(205, 172, 89, 23);
