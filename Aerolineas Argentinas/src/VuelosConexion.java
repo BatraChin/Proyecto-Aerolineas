@@ -17,7 +17,7 @@ public class VuelosConexion {
 
 public VuelosConexion(){
 	
-	String driver ="com.mysql.jdbc.Driver";
+	
 	servidor = "localhost:3306";
     baseDatos = "vuelos";
     uriConexion = /*"jdbc:mysql://" + servidor + "/" + baseDatos +"?noAccessToProcedureBodies=true";*/"jdbc:mysql://" + servidor + "/" + 
