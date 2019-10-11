@@ -61,18 +61,16 @@ public boolean conectarBDempleado(int legajo,String clave)
          Class.forName("com.mysql.jdbc.Driver").newInstance();
       }
       catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}*/
 
       try
       {
 
-         String uriConexion = /*"jdbc:mysql://" + servidor + "/" + baseDatos +"?noAccessToProcedureBodies=true"*/"jdbc:mysql://" + servidor + "/" + 
-                 baseDatos +"?serverTimezone=America/Argentina/Buenos_Aires";
+        String uriConexion = "jdbc:mysql://" + servidor + "/" + baseDatos +"?serverTimezone=America/Argentina/Buenos_Aires";
                
         this.conexionBD =  DriverManager.getConnection(uriConexion, "admin", "admin");
-<<<<<<< HEAD
         
         java.sql.Statement stmt = conexionBD.createStatement();
 		java.sql.ResultSet rs = stmt.executeQuery("select distinct legajo,password from empleados where legajo="+legajo+" and password="+"'"+clave+"';");
@@ -81,13 +79,8 @@ public boolean conectarBDempleado(int legajo,String clave)
         if (rs.next()){ 
         	 
         	desconectarBD();
-=======
-        java.sql.ResultSet rs=consulta("select distinct legajo,password from empleados where legajo="+legajo+" and password="+"'"+clave+"';");
-        System.out.println(rs.toString());
-        if (rs.next()){ 
-        	 desconectarBD();
->>>>>>> c9717ec3e590ea5b7750d26fae40c61be0445e28
         	 this.conexionBD = (Connection) DriverManager.getConnection(uriConexion, "empleado", "empleado");
+        	 	
         	 return true;}
         else{
            desconectarBD();
@@ -123,7 +116,7 @@ public Connection getConexionBD()
 	return conexionBD;
 }
 
-private java.sql.ResultSet consulta (String sql){
+/*private java.sql.ResultSet consulta (String sql){
 	try
 	{
 		
@@ -134,7 +127,7 @@ private java.sql.ResultSet consulta (String sql){
 	}
 	catch (java.sql.SQLException ex) {}
 	return null;
-}
+}*/
 
 public void conectarTabla(DBTable tabla) {
 	  try {
