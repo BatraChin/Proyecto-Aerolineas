@@ -239,6 +239,12 @@ public class ReservasGUI {
 		panelClaseVueloVuelta.add(tableClasesVuelta);
 		
 		btnVolverAlInicio = new JButton("Volver al inicio");
+		btnVolverAlInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
+			}
+		});
 		btnVolverAlInicio.setBounds(370, 492, 133, 23);
 		frame.getContentPane().add(btnVolverAlInicio);
 		
@@ -249,8 +255,6 @@ public class ReservasGUI {
 		JLabel lblVueloDeVuelta = new JLabel("Vuelo de Vuelta");
 		lblVueloDeVuelta.setBounds(31, 296, 97, 14);
 		frame.getContentPane().add(lblVueloDeVuelta);
-		OyenteRegresar or= new OyenteRegresar(this.frame);
-		btnVolverAlInicio.addActionListener(or);
 	}
 	
 	private class OyenteBuscar implements ActionListener {
@@ -455,18 +459,14 @@ public class ReservasGUI {
 				}
 			}
 				
-				 private class OyenteRegresar implements ActionListener
-				   {
-					 JFrame f;
-					 public OyenteRegresar(JFrame frame){
-						 f=frame;
-					 }
+				 private class OyenteRegresar implements ActionListener   {
+					 
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						
 						prev.setVisible(true);
 						v.desconectarBD();
-						f.dispose();
+						frame.dispose();
 						
 					}
 					   

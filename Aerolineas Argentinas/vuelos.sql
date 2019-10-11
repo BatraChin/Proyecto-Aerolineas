@@ -246,11 +246,11 @@ CREATE TABLE reserva_vuelo_clase (
 CREATE VIEW vuelos_disponibles AS 
 
 	SELECT 
-		v_p.numero AS 'Cod. vuelo' ,s.modelo_avion AS 'Modelo avion', i_v.fecha AS 'Fecha', 
-		s.hora_sale AS 'Hora salida', s.hora_llega AS 'Hora llegada', timediff(s.hora_llega,s.hora_sale) as 'Tiempo estimado',
-		a_1.codigo AS 'Aeropuerto origen', a_1.pais  AS 'Pais origen' , a_1.estado AS 'Estado origen' , 
-		a_1.ciudad AS 'Ciudad origen',  a_2.codigo AS 'Aeropuerto destino', a_2.pais 'Pais destino', 
-		a_2.estado AS 'Estado destino', a_2.ciudad AS 'Ciudad destino', br.clase AS 'Clase' , br.precio AS 'Precio',
+		v_p.numero AS 'Cod_vuelo' ,s.modelo_avion AS 'Modelo_avion', i_v.fecha AS 'Fecha', 
+		s.hora_sale AS 'Hora_salida', s.hora_llega AS 'Hora_llegada', timediff(s.hora_llega,s.hora_sale) as 'Tiempo_estimado',
+		a_1.codigo AS 'Aeropuerto_origen', a_1.pais  AS 'Pais_origen' , a_1.estado AS 'Estado_origen' , 
+		a_1.ciudad AS 'Ciudad_origen',  a_2.codigo AS 'Aeropuerto_destino', a_2.pais 'Pais_destino', 
+		a_2.estado AS 'Estado_destino', a_2.ciudad AS 'Ciudad_destino', br.clase AS 'Clase' , br.precio AS 'Precio',
 	    TRUNCATE ((br.cant_asientos + c.porcentaje*br.cant_asientos) - (SELECT COUNT(*) FROM reserva_vuelo_clase WHERE 
 		reserva_vuelo_clase.clase = br.clase  AND reserva_vuelo_clase.vuelo = i_v.vuelo AND 
 		reserva_vuelo_clase.fecha_vuelo = i_v.fecha	) ,0) AS 'Asientos_disponibles'
@@ -274,6 +274,8 @@ CREATE VIEW vuelos_disponibles AS
 #usuario empleado
  
  CREATE USER empleado@'%' IDENTIFIED BY 'empleado';
+ 
+ GRANT SELECT ON vuelos.* TO empleado@'%';
  
  GRANT SELECT,INSERT,UPDATE,DELETE on vuelos.pasajeros TO empleado@'%';
  

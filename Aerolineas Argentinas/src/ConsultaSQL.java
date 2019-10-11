@@ -115,9 +115,13 @@ public class ConsultaSQL extends javax.swing.JInternalFrame {
 	            {	
 	                btnVolverAlInicio = new JButton("Volver al inicio");
 		       		btnVolverAlInicio.setBounds(371, 506, 133, 23);
+		      
 		       		pnlConsulta.add(btnVolverAlInicio);
-		       		OyenteRegresar or= new OyenteRegresar(this.frame);
-		       		btnVolverAlInicio.addActionListener(or);
+		       		btnVolverAlInicio.addActionListener(new ActionListener() {
+	            		public void actionPerformed(ActionEvent arg0) {
+	            		  frame.dispose();            			
+	            		}
+	            	});
 		       		
 	            }
   
