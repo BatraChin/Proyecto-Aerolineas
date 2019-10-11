@@ -104,7 +104,7 @@ public class ConsultaSQL extends javax.swing.JInternalFrame {
 	            {
 	            	botonBorrar = new JButton();
 	            	pnlConsulta.add(botonBorrar);
-	            	botonBorrar.setText("Borrar");            
+	            	botonBorrar.setText("Limpiar");            
 	            	botonBorrar.addActionListener(new ActionListener() {
 	            		public void actionPerformed(ActionEvent arg0) {
 	            		  txtConsulta.setText("");            			

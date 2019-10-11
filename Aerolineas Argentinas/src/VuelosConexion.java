@@ -73,7 +73,6 @@ public boolean conectarBDempleado(int legajo,String clave)
                
         this.conexionBD =  DriverManager.getConnection(uriConexion, "admin", "admin");
         java.sql.ResultSet rs=consulta("select distinct legajo,password from empleados where legajo="+legajo+" and password="+"'"+clave+"';");
-        System.out.println(rs.toString());
         if (rs.next()){ 
         	 desconectarBD();
         	 this.conexionBD = (Connection) DriverManager.getConnection(uriConexion, "empleado", "empleado");
