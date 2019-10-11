@@ -77,7 +77,7 @@ public boolean conectarBDempleado(int legajo,String clave)
         
         
         if (rs.next()){ 
-        	System.out.println("aca"); 
+        	 
         	desconectarBD();
         	 this.conexionBD = (Connection) DriverManager.getConnection(uriConexion, "empleado", "empleado");
         	 	
