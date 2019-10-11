@@ -238,7 +238,12 @@ public class ConsultaSQL extends javax.swing.JInternalFrame {
 	    	  controlExecute = 0;
 	       }
 	      catch (SQLException ex)
-	      {
+	      {/*
+	    	  JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this),
+                      ex.getMessage() + "\n", 
+                      "Error al ejecutar la consulta.",
+                      JOptionPane.ERROR_MESSAGE);*/
+	    	  
 	         
 	    	 controlExecute = 1;
 	    	 //todavia no se ejecuto el update
@@ -263,7 +268,7 @@ public class ConsultaSQL extends javax.swing.JInternalFrame {
 			         	controlExecute = 0;
 			         	controlUpdate = 0;
 			         }
-	         
+	        
 	      }
 	      
 	   }

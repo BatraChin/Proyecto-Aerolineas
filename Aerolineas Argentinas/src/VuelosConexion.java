@@ -74,7 +74,8 @@ public boolean conectarBDempleado(int legajo,String clave)
         
         java.sql.Statement stmt = conexionBD.createStatement();
 		java.sql.ResultSet rs = stmt.executeQuery("select distinct legajo,password from empleados where legajo="+legajo+" and password="+"'"+clave+"';");
-        System.out.println (rs.next());
+        
+        
         if (rs.next()){ 
         	System.out.println("aca"); 
         	desconectarBD();
