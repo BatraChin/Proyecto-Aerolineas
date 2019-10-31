@@ -277,7 +277,7 @@ public class ReservasGUI {
 				java.sql.Date ida=pasarFechas(fechaIda.getText());
 				if (fechaIda!=null)
 				{
-					String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen, Pais_destino, Ciudad_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
+					String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen,Aeropuerto_origen, Pais_destino, Ciudad_destino,Aeropuerto_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
 /*
 					try {
 						java.sql.Statement st = v.getConexionBD().createStatement();
