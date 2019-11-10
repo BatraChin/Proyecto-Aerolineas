@@ -425,7 +425,7 @@ public class ReservasGUI {
 			        	String llegada=(String) tableVuelosVuelta.getValueAt(row,8);
 			        	Time h_llegada= (Time) tableVuelosVuelta.getValueAt(row,4);
 			        	String modelo=(String) tableVuelosVuelta.getValueAt(row,1);
-			        	String query="SELECT DISTINCT CLASE,DISPONIBLES,PRECIO FROM VUELOS_DISPONIBLES WHERE VUELO='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';";
+			        	String query= "SELECT DISTINCT Clase, Asientos_disponibles,Precio FROM vuelos_disponibles WHERE Cod_vuelo='"+numero+"' AND Ciudad_origen='"+salida+"' AND Hora_salida='"+h_salida+"' AND Ciudad_destino='"+llegada+"' AND Hora_llegada='"+h_llegada+"' AND Modelo_avion='"+modelo+"';";
 			        	//Muestra los datos de un determinado vuelo
 			        	m.refrescarTabla(query,tableClasesVuelta,v);
 			        	
