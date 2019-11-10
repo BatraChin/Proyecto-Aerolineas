@@ -315,7 +315,7 @@ public class ReservasGUI {
 					if(!ida.after(vuelta)){
 						String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen, Pais_destino, Ciudad_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
 						m.refrescarTabla(consulta,tableVuelosIda,v);
-						String consulta1 ="SELECT DISTINCT SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen, Pais_destino, Ciudad_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+destino+"' AND Ciudad_destino='"+origen+"' AND Fecha='"+vuelta+"';"; 
+						String consulta1 ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen, Pais_destino, Ciudad_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+destino+"' AND Ciudad_destino='"+origen+"' AND Fecha='"+vuelta+"';"; 
 						m.refrescarTabla(consulta1,tableVuelosVuelta,v);
 						tableVuelosIda.setVisible(true);
 						tableVuelosVuelta.setVisible(true);
