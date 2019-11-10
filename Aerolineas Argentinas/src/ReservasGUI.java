@@ -85,7 +85,7 @@ public class ReservasGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 878, 612);
+		frame.setBounds(100, 100, 878, 695);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
@@ -116,7 +116,7 @@ public class ReservasGUI {
 		destinoTextField.setColumns(10);
 		
 		panelUsuarios = new JPanel();
-		panelUsuarios.setBounds(10, 358, 839, 137);
+		panelUsuarios.setBounds(10, 470, 839, 137);
 		panelUsuarios.setVisible(true);
 		frame.getContentPane().add(panelUsuarios);
 		panelUsuarios.setLayout(null);
@@ -274,7 +274,7 @@ public class ReservasGUI {
 				frame.dispose();
 			}
 		});
-		btnVolverAlInicio.setBounds(370, 492, 133, 23);
+		btnVolverAlInicio.setBounds(380, 632, 133, 23);
 		frame.getContentPane().add(btnVolverAlInicio);
 		
 		JLabel lblVueloDeIda = new JLabel("Vuelo de Ida");
@@ -284,6 +284,10 @@ public class ReservasGUI {
 		JLabel lblVueloDeVuelta = new JLabel("Vuelo de Vuelta");
 		lblVueloDeVuelta.setBounds(31, 291, 97, 14);
 		frame.getContentPane().add(lblVueloDeVuelta);
+		
+		JLabel lblPasajeros = new JLabel("Pasajeros");
+		lblPasajeros.setBounds(31, 458, 48, 14);
+		frame.getContentPane().add(lblPasajeros);
 	}
 	
 	private class OyenteBuscar implements ActionListener {
