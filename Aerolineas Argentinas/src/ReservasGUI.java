@@ -260,6 +260,7 @@ public class ReservasGUI {
 		scrollPaneClaseVueloVuelta = new JScrollPane();
 		scrollPaneClaseVueloVuelta.setBounds(563, 11, 266, 115);
 		panelVuelta.add(scrollPaneClaseVueloVuelta);
+		scrollPaneClaseVueloIda.setVisible(true);
 		
 		panelClaseVueloVuelta = new JPanel();
 		scrollPaneClaseVueloVuelta.setViewportView(panelClaseVueloVuelta);
@@ -267,6 +268,8 @@ public class ReservasGUI {
 		
 		tableClasesVuelta = new JTable();
 		panelClaseVueloVuelta.add(tableClasesVuelta);
+		tableClasesIda.setVisible(true);
+
 		
 		btnVolverAlInicio = new JButton("Volver al inicio");
 		btnVolverAlInicio.addActionListener(new ActionListener() {
@@ -401,7 +404,7 @@ public class ReservasGUI {
 						        	Time h_llegada= (Time) tableVuelosVuelta.getValueAt(rowVuelta,4);
 						        	String modelo=(String) tableVuelosVuelta.getValueAt(rowVuelta,1);
 						        	//Muestra los datos de un determinado vuelo
-						        	m.refrescarTabla("SELECT DISTINCT CLASE,DISPONIBLES,PRECIO FROM VUELOS_DISPONIBLES WHERE VUELO='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesVuelta,v);
+						        	m.refrescarTabla("SELECT DISTINCT CLASE,Asientos_disponibles,PRECIO FROM VUELOS_DISPONIBLES WHERE Cod_vuelo='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesVuelta,v);
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -420,7 +423,7 @@ public class ReservasGUI {
 	        	String llegada=(String) tableVuelosIda.getValueAt(rowIda,8);
 	        	Time h_llegada= (Time) tableVuelosIda.getValueAt(rowIda,4);
 	        	String modelo=(String) tableVuelosIda.getValueAt(rowIda,1);
-	        	m.refrescarTabla("SELECT DISTINCT CLASE,DISPONIBLES,PRECIO FROM VUELOS_DISPONIBLES WHERE VUELO='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesIda,v);}
+	        	m.refrescarTabla("SELECT DISTINCT CLASE,Asientos_disponibles,PRECIO FROM VUELOS_DISPONIBLES WHERE Cod_vuelo='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesIda,v);}
 			
 		}
 		
@@ -433,7 +436,7 @@ public class ReservasGUI {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			tableVuelosIda.setVisible(false);
-			tableClasesIda.setVisible(false);
+			//tableClasesIda.setVisible(false);
 			tableVuelosVuelta.setVisible(false);
 			tableClasesVuelta.setVisible(false);
 			String origen= (String) origenTextField.getText();
@@ -472,6 +475,7 @@ public class ReservasGUI {
 					m.refrescarTabla(consulta,tableVuelosIda,v);
 					System.out.println("aca");
 					tableVuelosIda.setVisible(true);
+					
 					
 
 				}
