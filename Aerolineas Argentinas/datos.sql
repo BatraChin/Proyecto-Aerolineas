@@ -31,12 +31,12 @@ INSERT INTO pasajeros VALUES ("dni", 30671234, "Cavallo", "Alejandro", "Mitre 21
 INSERT INTO pasajeros VALUES ("dni", 17284515, "Lalaland", "Lautaro", "Colon 760", "291-4745341", "Argetino" );
 
 # EMPLEADO
-INSERT INTO empleados VALUES (100000, "aaa000", "dni", 36715341, "Gonzales", "Jose", "12 de Octubre 1215", "2926-401352");
-INSERT INTO empleados VALUES (100001, "aaa001", "dni", 31247379, "Prat-Gay", "Alfonso", "Belgrano 315", "2926-401352");
-INSERT INTO empleados VALUES (100002, "aaa002", "dni", 15671234, "Carabajal", "Carlos", "Salta 720", "2926-401352");
-INSERT INTO empleados VALUES (100003, "aaa003", "dni", 11234583, "Simpson", "Homero", "Donado 651", "2926-401352");
-INSERT INTO empleados VALUES (200000, "aaa004", "dni", 32456112, "Romero", "Jorge", "Cuyo 691", "2926-401352");
-INSERT INTO empleados VALUES (200001, "aaa005", "dni", 30122914, "Sosa", "Mercedes", "19 de mayo 1232", "2926-401352");
+INSERT INTO empleados VALUES (100000, md5("aaa000"), "dni", 36715341, "Gonzales", "Jose", "12 de Octubre 1215", "2926-401352");
+INSERT INTO empleados VALUES (100001, md5("aaa001"), "dni", 31247379, "Prat-Gay", "Alfonso", "Belgrano 315", "2926-401352");
+INSERT INTO empleados VALUES (100002, md5("aaa002"), "dni", 15671234, "Carabajal", "Carlos", "Salta 720", "2926-401352");
+INSERT INTO empleados VALUES (100003, md5("aaa003"), "dni", 11234583, "Simpson", "Homero", "Donado 651", "2926-401352");
+INSERT INTO empleados VALUES (200000, md5("aaa004"), "dni", 32456112, "Romero", "Jorge", "Cuyo 691", "2926-401352");
+INSERT INTO empleados VALUES (200001, md5("aaa005"), "dni", 30122914, "Sosa", "Mercedes", "19 de mayo 1232", "2926-401352");
 
 # AEROPUERTOS
 INSERT INTO aeropuertos VALUES ("EZE", "Ministro Pistarini", "011-4124124", "Autopista Gral. Ricchieri Km 33,5", "Argentina", "Buenos Aires", "Buenos Aires");

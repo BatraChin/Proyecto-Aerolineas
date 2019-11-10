@@ -239,18 +239,22 @@ public class ReservasGUI {
 		panelClaseVueloVuelta.add(tableClasesVuelta);
 		
 		btnVolverAlInicio = new JButton("Volver al inicio");
+		btnVolverAlInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
+			}
+		});
 		btnVolverAlInicio.setBounds(370, 492, 133, 23);
 		frame.getContentPane().add(btnVolverAlInicio);
 		
 		JLabel lblVueloDeIda = new JLabel("Vuelo de Ida");
-		lblVueloDeIda.setBounds(27, 132, 75, 14);
+		lblVueloDeIda.setBounds(31, 129, 75, 14);
 		frame.getContentPane().add(lblVueloDeIda);
 		
 		JLabel lblVueloDeVuelta = new JLabel("Vuelo de Vuelta");
-		lblVueloDeVuelta.setBounds(31, 296, 97, 14);
+		lblVueloDeVuelta.setBounds(31, 291, 97, 14);
 		frame.getContentPane().add(lblVueloDeVuelta);
-		OyenteRegresar or= new OyenteRegresar(this.frame);
-		btnVolverAlInicio.addActionListener(or);
 	}
 	
 	private class OyenteBuscar implements ActionListener {
@@ -273,7 +277,7 @@ public class ReservasGUI {
 				java.sql.Date ida=pasarFechas(fechaIda.getText());
 				if (fechaIda!=null)
 				{
-					String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen, Pais_destino, Ciudad_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
+					String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen,Aeropuerto_origen, Pais_destino, Ciudad_destino,Aeropuerto_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
 /*
 					try {
 						java.sql.Statement st = v.getConexionBD().createStatement();
@@ -455,18 +459,14 @@ public class ReservasGUI {
 				}
 			}
 				
-				 private class OyenteRegresar implements ActionListener
-				   {
-					 JFrame f;
-					 public OyenteRegresar(JFrame frame){
-						 f=frame;
-					 }
+				 private class OyenteRegresar implements ActionListener   {
+					 
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						
 						prev.setVisible(true);
 						v.desconectarBD();
-						f.dispose();
+						frame.dispose();
 						
 					}
 					   
