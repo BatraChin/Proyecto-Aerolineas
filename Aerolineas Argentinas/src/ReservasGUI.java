@@ -33,7 +33,14 @@ public class ReservasGUI {
 	private JTable tableClasesIda;
 	private JTable tableVuelosVuelta;
 	private JTable tableClasesVuelta;
-	
+	private JPanel panelUsuarios;
+
+	private JPanel panelUsuariosDisponibles;
+	private JTable tableUsuarios;
+	private JScrollPane scrollPaneUsuarios;
+
+
+
 	private int legajo;
 	private VuelosConexion v;
 	protected static ModificarTabla m=new ModificarTabla();
@@ -58,6 +65,7 @@ public class ReservasGUI {
 	private JScrollPane scrollPaneClaseVueloVuelta;
 	private JButton btnVolverAlInicio;
 	private JFrame prev;
+	
 
 	/**
 	 * Create the application.
@@ -106,6 +114,27 @@ public class ReservasGUI {
 		destinoTextField.setBounds(302, 17, 86, 20);
 		panelLugarFecha.add(destinoTextField);
 		destinoTextField.setColumns(10);
+		
+		panelUsuarios = new JPanel();
+		panelUsuarios.setBounds(10, 358, 839, 137);
+		panelUsuarios.setVisible(true);
+		frame.getContentPane().add(panelUsuarios);
+		panelUsuarios.setLayout(null);
+		
+		scrollPaneUsuarios = new JScrollPane();
+		scrollPaneUsuarios.setBounds(10, 11, 686, 115);
+		panelUsuarios.add(scrollPaneUsuarios);
+		
+		panelUsuariosDisponibles = new JPanel();
+		scrollPaneUsuarios.setViewportView(panelUsuariosDisponibles);
+		panelUsuariosDisponibles.setVisible(true);
+		
+
+		tableUsuarios = new JTable();
+		panelUsuariosDisponibles.add(tableUsuarios);
+		tableUsuarios.setAutoCreateRowSorter(true);
+		m.refrescarTabla("select * from pasajeros", tableUsuarios,v);
+
 		
 		idaRadioButton = new JRadioButton("Ida");
 		idaRadioButton.addActionListener(new ActionListener() {
