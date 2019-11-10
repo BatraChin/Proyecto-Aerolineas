@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import java.awt.Panel;
 import javax.swing.JTextField;
 
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
@@ -288,8 +289,145 @@ public class ReservasGUI {
 		JLabel lblPasajeros = new JLabel("Pasajeros");
 		lblPasajeros.setBounds(31, 458, 48, 14);
 		frame.getContentPane().add(lblPasajeros);
+		
+		JButton btnReservar = new JButton("Reservar");
+		btnReservar.setBounds(254, 632, 89, 23);
+		frame.getContentPane().add(btnReservar);
+		OyenteReservar ore = new OyenteReservar();
+		btnReservar.addActionListener(ore);
+
 	}
+	private class OyenteReservar implements ActionListener
+	   {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//Obtiene las filas seleccionadas
+			int rowIda,rowClaseIda, rowVuelta, rowClaseVuelta, rowPasajero;
+			rowIda = tableVuelosIda.getSelectedRow();
+			rowClaseIda = tableClasesIda.getSelectedRow();
+			rowPasajero = tableUsuarios.getSelectedRow();
+			if (rowIda==-1 || rowClaseIda==-1 || rowPasajero==-1)
+			{
+				JOptionPane.showMessageDialog(new JFrame(),
+                     "Falta seleccionar algun parámetro\n", 
+                     "Error",
+                     JOptionPane.ERROR_MESSAGE);
+			}
+			else 
+			{
+				CallableStatement cs = null;
+				if (idaRadioButton.isSelected())
+				{//Lleva a cabo el stored procedure
+					try {
+						
+						System.out.println(" ");
+						cs = v.getConexionBD().prepareCall("{ call reservarVueloIda(?,?,?,?,?,?,?)}");
+						cs.setString(1,(String)tableVuelosIda.getValueAt(rowIda,0));
+						System.out.println(tableVuelosIda.getValueAt(rowIda,0));
+						cs.setString(2,(String)tableClasesIda.getValueAt(rowClaseIda,0));
+						System.out.println(tableClasesIda.getValueAt(rowClaseIda,0));
+						
+						cs.setDate(3,pasarFechas(fechaIda.getText()));
+						System.out.println(pasarFechas(fechaIda.getText()));
+						
+						cs.setString(4,(String)tableUsuarios.getValueAt(rowPasajero,0));
+						System.out.println(tableUsuarios.getValueAt(rowPasajero,0));
+						
+						cs.setLong(5,(Long)tableUsuarios.getValueAt(rowPasajero,1));
+						System.out.println(tableUsuarios.getValueAt(rowPasajero,1));
+						
+						cs.setInt(6,legajo);
+						System.out.println(legajo);
+
+						System.out.println("FIN ");
+						cs.registerOutParameter(7, Types.VARCHAR);
+						
+						cs.execute();					
+							JOptionPane.showMessageDialog(null, cs.getString(7),"Información"
+									, JOptionPane.INFORMATION_MESSAGE);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+						System.out.println( e1.getMessage());
+						JOptionPane.showMessageDialog(new JFrame(),
+								  
+		                        "No se pudo realizar la operacion\n", 
+		                        "Error",
+		                        JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				else
+				{
+					//Ejecuta Stored procedure
+					try {
+						rowVuelta = tableVuelosVuelta.getSelectedRow();
+						rowClaseVuelta = tableClasesVuelta.getSelectedRow();
+						if (rowVuelta==-1 || rowClaseVuelta==-1 )
+						{
+							JOptionPane.showMessageDialog(new JFrame(),
+			                        "Falta seleccionar algun parámetro\n", 
+			                        "Error",
+			                        JOptionPane.ERROR_MESSAGE);
+						}
+						else{
+								cs = v.getConexionBD().prepareCall("{ call reservarVueloIdaVuelta(?,?,?,?,?,?,?,?,?,?)}");
+								cs.setString(1,(String)tableVuelosIda.getValueAt(rowIda,0));
+								System.out.println(tableVuelosIda.getValueAt(rowIda,0));
+								cs.setString(2,(String)tableVuelosVuelta.getValueAt(rowVuelta,0));
+								System.out.println(tableVuelosVuelta.getValueAt(rowVuelta,0));
+								cs.setString(3,(String)tableClasesIda.getValueAt(rowClaseIda,0));
+								System.out.println(tableClasesIda.getValueAt(rowClaseIda,0));
+								cs.setString(4,(String)tableClasesVuelta.getValueAt(rowClaseVuelta,0));
+								System.out.println(tableClasesVuelta.getValueAt(rowClaseVuelta,0));
+								cs.setDate(5,pasarFechas(fechaIda.getText()));
+								System.out.println(fechaIda.getText());
+								cs.setDate(6,pasarFechas(fechaVuelta.getText()));
+								System.out.println(fechaVuelta.getText());
+								cs.setString(7,(String)tableUsuarios.getValueAt(rowPasajero,0));
+								System.out.println(tableUsuarios.getValueAt(rowPasajero,0));
+								cs.setLong(8,(Long)tableUsuarios.getValueAt(rowPasajero,1));
+								System.out.println(tableUsuarios.getValueAt(rowPasajero,1));
+								cs.setInt(9,legajo);
+								
+								cs.registerOutParameter(10, Types.VARCHAR);
+								cs.execute();					
+									JOptionPane.showMessageDialog(null, cs.getString(10),"Información"
+											, JOptionPane.INFORMATION_MESSAGE);
+									//Actualizo las tablas que se modificaron
+									String numero=(String) tableVuelosVuelta.getValueAt(rowVuelta,0);
+						        	String salida= (String) tableVuelosVuelta.getValueAt(rowVuelta,6);
+						        	Time h_salida= (Time) tableVuelosVuelta.getValueAt(rowVuelta,3);
+						        	String llegada=(String) tableVuelosVuelta.getValueAt(rowVuelta,8);
+						        	Time h_llegada= (Time) tableVuelosVuelta.getValueAt(rowVuelta,4);
+						        	String modelo=(String) tableVuelosVuelta.getValueAt(rowVuelta,1);
+						        	//Muestra los datos de un determinado vuelo
+						        	m.refrescarTabla("SELECT DISTINCT CLASE,DISPONIBLES,PRECIO FROM VUELOS_DISPONIBLES WHERE VUELO='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesVuelta,v);
+						}
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(new JFrame(),
+		                        "No se pudo realizar la operacion\n", 
+		                        "Error",
+		                        JOptionPane.ERROR_MESSAGE);
+					}
+				
+				
+				}
+				//Actualizo las tablas que se modificaron
+				String numero=(String) tableVuelosIda.getValueAt(rowIda,0);
+	        	String salida= (String) tableVuelosIda.getValueAt(rowIda,6);
+	        	Time h_salida= (Time) tableVuelosIda.getValueAt(rowIda,3);
+	        	String llegada=(String) tableVuelosIda.getValueAt(rowIda,8);
+	        	Time h_llegada= (Time) tableVuelosIda.getValueAt(rowIda,4);
+	        	String modelo=(String) tableVuelosIda.getValueAt(rowIda,1);
+	        	m.refrescarTabla("SELECT DISTINCT CLASE,DISPONIBLES,PRECIO FROM VUELOS_DISPONIBLES WHERE VUELO='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesIda,v);}
+			
+		}
+		
+		
+
 	
+}
 	private class OyenteBuscar implements ActionListener {
 		
 		@Override
@@ -310,8 +448,7 @@ public class ReservasGUI {
 				java.sql.Date ida=pasarFechas(fechaIda.getText());
 				if (fechaIda!=null)
 				{
-					String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen,Aeropuerto_origen, Pais_destino, Ciudad_destino,Aeropuerto_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
-/*
+					String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen,Aeropuerto_origen, Pais_destino, Ciudad_destino,Aeropuerto_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; /*
 					try {
 						java.sql.Statement st = v.getConexionBD().createStatement();
 						ResultSet rs = st.executeQuery(consulta);
