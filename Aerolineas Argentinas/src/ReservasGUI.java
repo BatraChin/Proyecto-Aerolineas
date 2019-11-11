@@ -290,7 +290,7 @@ public class ReservasGUI {
 		frame.getContentPane().add(lblVueloDeVuelta);
 		
 		JLabel lblPasajeros = new JLabel("Pasajeros");
-		lblPasajeros.setBounds(31, 458, 48, 14);
+		lblPasajeros.setBounds(31, 458, 65, 14);
 		frame.getContentPane().add(lblPasajeros);
 		
 		JButton btnReservar = new JButton("Reservar");
