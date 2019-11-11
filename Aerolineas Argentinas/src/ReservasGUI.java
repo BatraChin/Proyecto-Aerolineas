@@ -147,7 +147,7 @@ public class ReservasGUI {
 				tableVuelosVuelta.setVisible(false);
 				tableClasesVuelta.setVisible(false);
 				fechaIda.setVisible(true);
-				lblNewLabel_3.setVisible(false);
+			//	lblNewLabel_3.setVisible(false);
 				fechaVuelta.setVisible(false);
 			}
 		});
@@ -187,7 +187,7 @@ public class ReservasGUI {
 		lblNewLabel_3 = new JLabel("Fecha vuelta:");
 		lblNewLabel_3.setBounds(227, 58, 81, 14);
 		panelLugarFecha.add(lblNewLabel_3);
-		lblNewLabel_3.setVisible(false);
+		//lblNewLabel_3.setVisible(false);
 		
 		fechaVuelta = new JFormattedTextField();
 		fechaVuelta.setText("##/##/####");
@@ -324,7 +324,7 @@ public class ReservasGUI {
 				{//Lleva a cabo el stored procedure
 					try {
 						
-						System.out.println(" ");
+						System.out.println(" estoy entrando en esete coso que no se que hace");
 						cs = v.getConexionBD().prepareCall("{ call reservarVueloIda(?,?,?,?,?,?,?)}");
 						cs.setString(1,(String)tableVuelosIda.getValueAt(rowIda,0));
 						System.out.println(tableVuelosIda.getValueAt(rowIda,0));
@@ -435,7 +435,7 @@ public class ReservasGUI {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			tableVuelosIda.setVisible(false);
+			//tableVuelosIda.setVisible(false);
 			//tableClasesIda.setVisible(false);
 			tableVuelosVuelta.setVisible(false);
 			tableClasesVuelta.setVisible(false);
@@ -451,7 +451,8 @@ public class ReservasGUI {
 				java.sql.Date ida=pasarFechas(fechaIda.getText());
 				if (fechaIda!=null)
 				{
-					String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen,Aeropuerto_origen, Pais_destino, Ciudad_destino,Aeropuerto_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; /*
+					String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen, Pais_destino, Ciudad_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
+					/*
 					try {
 						java.sql.Statement st = v.getConexionBD().createStatement();
 						ResultSet rs = st.executeQuery(consulta);
