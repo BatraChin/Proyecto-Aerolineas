@@ -323,8 +323,6 @@ public class ReservasGUI {
 				if (idaRadioButton.isSelected())
 				{//Lleva a cabo el stored procedure
 					try {
-						
-						System.out.println(" estoy entrando en esete coso que no se que hace");
 						cs = v.getConexionBD().prepareCall("{ call reservarVueloIda(?,?,?,?,?,?,?)}");
 						cs.setString(1,(String)tableVuelosIda.getValueAt(rowIda,0));
 						System.out.println(tableVuelosIda.getValueAt(rowIda,0));
