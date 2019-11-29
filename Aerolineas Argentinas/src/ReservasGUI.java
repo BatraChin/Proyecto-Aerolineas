@@ -396,13 +396,13 @@ public class ReservasGUI {
 											, JOptionPane.INFORMATION_MESSAGE);
 									//Actualizo las tablas que se modificaron
 									String numero=(String) tableVuelosVuelta.getValueAt(rowVuelta,0);
-						        	String salida= (String) tableVuelosVuelta.getValueAt(rowVuelta,6);
+						        	String salida= (String) tableVuelosVuelta.getValueAt(rowVuelta,2);
 						        	Time h_salida= (Time) tableVuelosVuelta.getValueAt(rowVuelta,3);
-						        	String llegada=(String) tableVuelosVuelta.getValueAt(rowVuelta,8);
-						        	Time h_llegada= (Time) tableVuelosVuelta.getValueAt(rowVuelta,4);
-						        	String modelo=(String) tableVuelosVuelta.getValueAt(rowVuelta,1);
+						        	String llegada=(String) tableVuelosVuelta.getValueAt(rowVuelta,4);
+						        	Time h_llegada= (Time) tableVuelosVuelta.getValueAt(rowVuelta,5);
+						        	String modelo=(String) tableVuelosVuelta.getValueAt(rowVuelta,6);
 						        	//Muestra los datos de un determinado vuelo
-						        	m.refrescarTabla("SELECT DISTINCT CLASE,Asientos_disponibles,PRECIO FROM VUELOS_DISPONIBLES WHERE Cod_vuelo='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesVuelta,v);
+						        	m.refrescarTabla("SELECT DISTINCT CLASE,Asientos_disponibles,PRECIO FROM VUELOS_DISPONIBLES WHERE Cod_vuelo='"+numero+"' AND Aeropuerto_origen ='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND Aeropuerto_destino ='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesVuelta,v);
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -416,11 +416,11 @@ public class ReservasGUI {
 				}
 				//Actualizo las tablas que se modificaron
 				String numero=(String) tableVuelosIda.getValueAt(rowIda,0);
-	        	String salida= (String) tableVuelosIda.getValueAt(rowIda,6);
+	        	String salida= (String) tableVuelosIda.getValueAt(rowIda,2);
 	        	Time h_salida= (Time) tableVuelosIda.getValueAt(rowIda,3);
-	        	String llegada=(String) tableVuelosIda.getValueAt(rowIda,8);
-	        	Time h_llegada= (Time) tableVuelosIda.getValueAt(rowIda,4);
-	        	String modelo=(String) tableVuelosIda.getValueAt(rowIda,1);
+	        	String llegada=(String) tableVuelosIda.getValueAt(rowIda,4);
+	        	Time h_llegada= (Time) tableVuelosIda.getValueAt(rowIda,5);
+	        	String modelo=(String) tableVuelosIda.getValueAt(rowIda,6);
 	        	m.refrescarTabla("SELECT DISTINCT CLASE,Asientos_disponibles,PRECIO FROM VUELOS_DISPONIBLES WHERE Cod_vuelo='"+numero+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesIda,v);}
 			
 		}
@@ -449,9 +449,10 @@ public class ReservasGUI {
 				java.sql.Date ida=pasarFechas(fechaIda.getText());
 				if (fechaIda!=null)
 				{
-					String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen, Pais_destino, Ciudad_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
+					String consulta ="SELECT DISTINCT Cod_vuelo, Fecha, Aeropuerto_origen, Hora_salida, Aeropuerto_destino, Hora_llegada, Modelo_avion, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
 					/*
-					try {
+					try {Nu´mero de vuelo aeropuerto_salida hora_sale aeropuerto_llegada hora_llega modelo_avion Tiempo estimado
+
 						java.sql.Statement st = v.getConexionBD().createStatement();
 						ResultSet rs = st.executeQuery(consulta);
 						ResultSetMetaData rsmd = rs.getMetaData();
@@ -490,9 +491,9 @@ public class ReservasGUI {
 				if (fechaVuelta!=null && fechaIda!=null) 
 					
 					if(!ida.after(vuelta)){
-						String consulta ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen, Pais_destino, Ciudad_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
+						String consulta ="SELECT DISTINCT Cod_vuelo, Fecha, Aeropuerto_origen, Hora_salida, Aeropuerto_destino, Hora_llegada, Modelo_avion, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+origen+"' AND Ciudad_destino='"+destino+"' AND Fecha='"+ida+"';"; 
 						m.refrescarTabla(consulta,tableVuelosIda,v);
-						String consulta1 ="SELECT DISTINCT Cod_vuelo, Modelo_avion, Fecha, Hora_salida, Hora_llegada, Pais_origen, Ciudad_origen, Pais_destino, Ciudad_destino, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+destino+"' AND Ciudad_destino='"+origen+"' AND Fecha='"+vuelta+"';"; 
+						String consulta1 ="SELECT DISTINCT Cod_vuelo, Fecha, Aeropuerto_origen, Hora_salida, Aeropuerto_destino, Hora_llegada, Modelo_avion, Tiempo_estimado FROM VUELOS_DISPONIBLES WHERE Ciudad_origen='"+destino+"' AND Ciudad_destino='"+origen+"' AND Fecha='"+vuelta+"';"; 
 						m.refrescarTabla(consulta1,tableVuelosVuelta,v);
 						tableVuelosIda.setVisible(true);
 						tableVuelosVuelta.setVisible(true);
@@ -543,16 +544,15 @@ public class ReservasGUI {
 
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					
 					int row = tableVuelosIda.rowAtPoint(arg0.getPoint());
 			        if (row >= 0) {
 			        	String numero=(String) tableVuelosIda.getValueAt(row,0);
-			        	String salida= (String) tableVuelosIda.getValueAt(row,6);
+			        	String salida= (String) tableVuelosIda.getValueAt(row,2);
 			        	Time h_salida= (Time) tableVuelosIda.getValueAt(row,3);
-			        	String llegada=(String) tableVuelosIda.getValueAt(row,8);
-			        	Time h_llegada= (Time) tableVuelosIda.getValueAt(row,4);
-			        	String modelo=(String) tableVuelosIda.getValueAt(row,1);
-			        	String query="SELECT DISTINCT Clase, Asientos_disponibles,Precio FROM vuelos_disponibles WHERE Cod_vuelo='"+numero+"' AND Ciudad_origen='"+salida+"' AND Hora_salida='"+h_salida+"' AND Ciudad_destino='"+llegada+"' AND Hora_llegada='"+h_llegada+"' AND Modelo_avion='"+modelo+"';";
+			        	String llegada=(String) tableVuelosIda.getValueAt(row,4);
+			        	Time h_llegada= (Time) tableVuelosIda.getValueAt(row,5);
+			        	String modelo=(String) tableVuelosIda.getValueAt(row,6);
+			        	String query="SELECT DISTINCT Clase, Asientos_disponibles,Precio FROM vuelos_disponibles WHERE Cod_vuelo='"+numero+"' AND Aeropuerto_origen='"+salida+"' AND Hora_salida='"+h_salida+"' AND Aeropuerto_destino='"+llegada+"' AND Hora_llegada='"+h_llegada+"' AND Modelo_avion='"+modelo+"';";
 			        	//Muestra los datos de un determinado vuelo
 			        	m.refrescarTabla(query,tableClasesIda,v);
 						tableClasesIda.setVisible(true);
@@ -590,15 +590,17 @@ public class ReservasGUI {
 
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
+					//Cod_vuelo, Fecha, Aeropuerto_origen, Hora_salida, Aeropuerto_destino, Hora_llegada, Modelo_avion, Tiempo_estimado FROM VUELOS_DISPONIBLES
+
 					int row = tableVuelosVuelta.rowAtPoint(arg0.getPoint());
 			        if (row >= 0) {
 			        	String numero=(String) tableVuelosVuelta.getValueAt(row,0);
-			        	String salida= (String) tableVuelosVuelta.getValueAt(row,6);
+			        	String salida= (String) tableVuelosVuelta.getValueAt(row,2);
 			        	Time h_salida= (Time) tableVuelosVuelta.getValueAt(row,3);
-			        	String llegada=(String) tableVuelosVuelta.getValueAt(row,8);
-			        	Time h_llegada= (Time) tableVuelosVuelta.getValueAt(row,4);
-			        	String modelo=(String) tableVuelosVuelta.getValueAt(row,1);
-			        	String query= "SELECT DISTINCT Clase, Asientos_disponibles,Precio FROM vuelos_disponibles WHERE Cod_vuelo='"+numero+"' AND Ciudad_origen='"+salida+"' AND Hora_salida='"+h_salida+"' AND Ciudad_destino='"+llegada+"' AND Hora_llegada='"+h_llegada+"' AND Modelo_avion='"+modelo+"';";
+			        	String llegada=(String) tableVuelosVuelta.getValueAt(row,4);
+			        	Time h_llegada= (Time) tableVuelosVuelta.getValueAt(row,5);
+			        	String modelo=(String) tableVuelosVuelta.getValueAt(row,6);
+			        	String query= "SELECT DISTINCT Clase, Asientos_disponibles,Precio FROM vuelos_disponibles WHERE Cod_vuelo='"+numero+"' AND Aeropuerto_origen='"+salida+"' AND Hora_salida='"+h_salida+"' AND Aeropuerto_destino='"+llegada+"' AND Hora_llegada='"+h_llegada+"' AND Modelo_avion='"+modelo+"';";
 			        	//Muestra los datos de un determinado vuelo
 			        	m.refrescarTabla(query,tableClasesVuelta,v);
 			        	
