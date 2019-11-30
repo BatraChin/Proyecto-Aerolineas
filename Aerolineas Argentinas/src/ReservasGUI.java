@@ -573,7 +573,11 @@ public class ReservasGUI {
 			        	String llegada=(String) tableVuelosIda.getValueAt(row,4);
 			        	Time h_llegada= (Time) tableVuelosIda.getValueAt(row,5);
 			        	String modelo=(String) tableVuelosIda.getValueAt(row,6);
+<<<<<<< HEAD
 			        	String query= "SELECT DISTINCT Clase, Asientos_disponibles,Precio FROM vuelos_disponibles WHERE Cod_vuelo='"+numero+"' AND Fecha='"+fechaS+"' AND Aeropuerto_origen='"+salida+"' AND Hora_salida='"+h_salida+"' AND Aeropuerto_destino='"+llegada+"' AND Hora_llegada='"+h_llegada+"' AND Modelo_avion='"+modelo+"';";
+=======
+			        	String query="SELECT DISTINCT Clase, Asientos_disponibles,Precio FROM vuelos_disponibles WHERE Cod_vuelo='"+numero+"' AND Fecha='"+fechaS+"' AND Aeropuerto_origen='"+salida+"' AND Hora_salida='"+h_salida+"' AND Aeropuerto_destino='"+llegada+"' AND Hora_llegada='"+h_llegada+"' AND Modelo_avion='"+modelo+"';" ;
+>>>>>>> parent of 836b2e6... Revert "Update ReservasGUI.java"
 			        	//Muestra los datos de un determinado vuelo
 			        	m.refrescarTabla(query,tableClasesIda,v);
 						tableClasesIda.setVisible(true);
@@ -624,6 +628,7 @@ public class ReservasGUI {
 			        	String modelo=(String) tableVuelosVuelta.getValueAt(row,6);
 			        	String query= "SELECT DISTINCT Clase, Asientos_disponibles,Precio FROM vuelos_disponibles WHERE Cod_vuelo='"+numero+"' AND Fecha='"+fechaV+"' AND Aeropuerto_origen='"+salida+"' AND Hora_salida='"+h_salida+"' AND Aeropuerto_destino='"+llegada+"' AND Hora_llegada='"+h_llegada+"' AND Modelo_avion='"+modelo+"';";
 			        	//Muestra los datos de un determinado vuelo
+			        	
 			        	m.refrescarTabla(query,tableClasesVuelta,v);
 			        	
 						tableClasesVuelta.setVisible(true);
