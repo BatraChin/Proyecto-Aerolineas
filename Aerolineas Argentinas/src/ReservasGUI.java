@@ -580,7 +580,6 @@ public class ReservasGUI {
 			        }
 					
 				}
-			
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
@@ -605,6 +604,9 @@ public class ReservasGUI {
 					// TODO Auto-generated method stub
 					
 				}
+			
+
+				
 			}
 			
 			private class OyenteTablaVuelta implements MouseListener{
@@ -616,7 +618,7 @@ public class ReservasGUI {
 					int row = tableVuelosVuelta.rowAtPoint(arg0.getPoint());
 			        if (row >= 0) {
 			        	String numero=(String) tableVuelosVuelta.getValueAt(row,0);
-			        	Date fechaV= (Date) tableVuelosIda.getValueAt(row,1);
+			        	Date fechaV= (Date) tableVuelosVuelta.getValueAt(row,1);
 			        	String salida= (String) tableVuelosVuelta.getValueAt(row,2);
 			        	Time h_salida= (Time) tableVuelosVuelta.getValueAt(row,3);
 			        	String llegada=(String) tableVuelosVuelta.getValueAt(row,4);
