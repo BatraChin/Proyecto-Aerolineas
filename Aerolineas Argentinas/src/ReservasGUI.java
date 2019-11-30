@@ -15,21 +15,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Types;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.JComboBox;
 
 public class ReservasGUI {
 
 	private JFrame frame;
-	private JTextField origenTextField;
-	private JTextField destinoTextField;
 	private JTable tableVuelosIda;
 	private JTable tableClasesIda;
 	private JTable tableVuelosVuelta;
@@ -66,6 +70,16 @@ public class ReservasGUI {
 	private JScrollPane scrollPaneClaseVueloVuelta;
 	private JButton btnVolverAlInicio;
 	private JFrame prev;
+	private String ciudadDestinoActual;
+	private String ciudadOrigenActual;
+
+	private JComboBox<String> comboOrigen = new JComboBox<String>();
+	private JComboBox<String> comboDestino = new JComboBox<String>();
+	private LinkedList<String> ciudadesOrigen ;
+	private LinkedList<String> ciudadesDestino ;
+
+
+
 	
 
 	/**
@@ -99,22 +113,12 @@ public class ReservasGUI {
 		panelLugarFecha.setVisible(true);
 		
 		lblNewLabel = new JLabel("Origen");
-		lblNewLabel.setBounds(87, 20, 46, 14);
+		lblNewLabel.setBounds(37, 20, 46, 14);
 		panelLugarFecha.add(lblNewLabel);
-		
-		origenTextField = new JTextField();
-		origenTextField.setBounds(131, 17, 86, 20);
-		panelLugarFecha.add(origenTextField);
-		origenTextField.setColumns(10);
 		
 		lblNewLabel_1 = new JLabel("Destino");
 		lblNewLabel_1.setBounds(246, 20, 46, 14);
 		panelLugarFecha.add(lblNewLabel_1);
-		
-		destinoTextField = new JTextField();
-		destinoTextField.setBounds(302, 17, 86, 20);
-		panelLugarFecha.add(destinoTextField);
-		destinoTextField.setColumns(10);
 		
 		panelUsuarios = new JPanel();
 		panelUsuarios.setBounds(10, 470, 839, 137);
@@ -175,23 +179,23 @@ public class ReservasGUI {
 		
 		
 		JLabel lblNewLabel_2 = new JLabel("Fecha ida:");
-		lblNewLabel_2.setBounds(87, 58, 57, 14);
+		lblNewLabel_2.setBounds(37, 58, 57, 14);
 		panelLugarFecha.add(lblNewLabel_2);
 		
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		fechaIda = new JFormattedTextField(format);
 		fechaIda.setText("##/##/####");
-		fechaIda.setBounds(141, 55, 81, 20);
+		fechaIda.setBounds(104, 55, 81, 20);
 		panelLugarFecha.add(fechaIda);
 		
 		lblNewLabel_3 = new JLabel("Fecha vuelta:");
-		lblNewLabel_3.setBounds(227, 58, 81, 14);
+		lblNewLabel_3.setBounds(246, 58, 81, 14);
 		panelLugarFecha.add(lblNewLabel_3);
 		//lblNewLabel_3.setVisible(false);
 		
 		fechaVuelta = new JFormattedTextField();
 		fechaVuelta.setText("##/##/####");
-		fechaVuelta.setBounds(302, 55, 81, 20);
+		fechaVuelta.setBounds(342, 55, 81, 20);
 		fechaVuelta.setVisible(false);
 		panelLugarFecha.add(fechaVuelta);
 		
@@ -199,6 +203,19 @@ public class ReservasGUI {
 
 		btnBuscar.setBounds(622, 38, 162, 23);
 		panelLugarFecha.add(btnBuscar);
+		
+		
+		comboOrigen.setBounds(104, 16, 115, 22);
+		panelLugarFecha.add(comboOrigen);
+		comboCiudadesDestino();
+		comboCiudadesOrigen();
+		comboOrigen.setSelectedIndex(-1);
+		comboDestino.setSelectedIndex(-1);
+		
+		
+
+		comboDestino.setBounds(302, 16, 121, 22);
+		panelLugarFecha.add(comboDestino);
 		OyenteBuscar ob= new OyenteBuscar();
 		btnBuscar.addActionListener(ob);
 		
@@ -437,8 +454,11 @@ public class ReservasGUI {
 			//tableClasesIda.setVisible(false);
 			tableVuelosVuelta.setVisible(false);
 			tableClasesVuelta.setVisible(false);
-			String origen= (String) origenTextField.getText();
-			String destino= (String) destinoTextField.getText();
+            String origen = (String) comboOrigen.getSelectedItem();
+            String destino = (String) comboDestino.getSelectedItem();
+
+			//String origen= (String) .getText();
+			//String destino= (String) destinoTextField.getText();
 			if (origen.equals(destino))
 				JOptionPane.showMessageDialog(new JFrame(),new String("Seleccione ciudades distintas"), 
                         "Error",
@@ -646,4 +666,67 @@ public class ReservasGUI {
 					}
 					   
 				   }
+				 
+				 
+				
+				 
+				 private void comboCiudadesOrigen() {
+						
+						try {
+						// Genero las ciudades que ya poseen vuelos programados
+							String ciudadesO = "SELECT DISTINCT a.ciudad" + 
+									"		FROM vuelos_programados vp NATURAL JOIN aeropuertos a" + 
+									"		WHERE vp.aeropuerto_salida = a.codigo;";
+							
+							ResultSet rs1 = v.consulta(ciudadesO);
+									
+							String aux;
+							comboOrigen.removeAll();
+							ciudadesOrigen = new LinkedList<String>();
+									
+							// Agrego las ciudades al comboBox
+							while(rs1.next())
+							{
+								ciudadesOrigen.addLast(rs1.getString("ciudad"));
+								aux = ciudadesOrigen.getLast().toString();
+								comboOrigen.addItem(aux);
+							}
+						}
+						catch(SQLException ex)
+						{
+							System.out.println("SQLException: " + ex.getMessage());
+							System.out.println("SQLState: " + ex.getSQLState());
+							System.out.println("VendorError: " + ex.getErrorCode());
+						}
+					}
+					
+					private void comboCiudadesDestino() {
+						
+						try {
+						// Genero los parquimetros y ubicaciones asociadas con el inpector
+							String ciudadesD = "SELECT DISTINCT a.ciudad" + 
+									"		FROM vuelos_programados vp NATURAL JOIN aeropuertos a" + 
+									"		WHERE vp.aeropuerto_llegada = a.codigo;";
+
+							ResultSet rs1 = v.consulta(ciudadesD);
+									
+							String aux;
+							comboDestino.removeAll();
+							ciudadesDestino = new LinkedList<String>();
+									
+							// Agrego las ciudades al comboBox
+							while(rs1.next())
+							{
+								ciudadesDestino.addLast(rs1.getString("ciudad"));
+								aux = ciudadesDestino.getLast().toString();
+								comboDestino.addItem(aux);
+							}
+						}
+						catch(SQLException ex)
+						{
+							System.out.println("SQLException: " + ex.getMessage());
+							System.out.println("SQLState: " + ex.getSQLState());
+							System.out.println("VendorError: " + ex.getErrorCode());
+						}
+					}
 }

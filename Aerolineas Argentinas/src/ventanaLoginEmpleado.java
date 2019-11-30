@@ -92,7 +92,7 @@ public class ventanaLoginEmpleado extends JFrame {
 				if (dbVuelos.conectarBDempleado(Integer.parseInt(txtUsuario.getText()),password))
 						//(Integer.parseInt(txtUsuario.getText()), password))
 				{
-						ReservasGUI reservas = new ReservasGUI(dbVuelos, panelContent, 100000); 
+						ReservasGUI reservas = new ReservasGUI(dbVuelos, panelContent, Integer.parseInt(txtUsuario.getText())); 
 								//Integer.parseInt(textField.getText()));
 						passwordField.setText("");
 						setVisible(false);

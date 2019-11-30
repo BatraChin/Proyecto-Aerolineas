@@ -1,7 +1,9 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 
 import quick.dbtable.DBTable;
@@ -51,6 +53,25 @@ public boolean conectarBD(String usuario,String clave)
 	         }
 	      return false;
 	   }
+
+public ResultSet consulta(String sql) {
+    try {
+        // Se crea una sentencia jdbc para realizar la consulta
+        Statement stmt = conexionBD.createStatement();
+
+        // Se ejecuta la sentencia y se recibe un resultado
+        ResultSet rs = stmt.executeQuery(sql);
+
+        return rs;
+    }
+    catch (SQLException ex)
+    {
+        System.out.println("SQLException: " + ex.getMessage());
+        System.out.println("SQLState: " + ex.getSQLState());
+        System.out.println("VendorError: " + ex.getErrorCode());
+    }
+    return null;
+}
 
 public boolean conectarBDempleado(int legajo,String clave)
 {
