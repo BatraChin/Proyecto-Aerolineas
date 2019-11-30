@@ -318,7 +318,7 @@ public class ReservasGUI {
 
 	}
 	private class OyenteReservar implements ActionListener
-	   {
+	  { 
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -386,6 +386,7 @@ public class ReservasGUI {
 			                        "Falta seleccionar algun parámetro\n", 
 			                        "Error",
 			                        JOptionPane.ERROR_MESSAGE);
+							
 						}
 						else{
 								cs = v.getConexionBD().prepareCall("{ call reservarVueloIdaVuelta(?,?,?,?,?,?,?,?,?,?)}");
@@ -423,6 +424,7 @@ public class ReservasGUI {
 						        	m.refrescarTabla("SELECT DISTINCT CLASE,Asientos_disponibles,PRECIO FROM VUELOS_DISPONIBLES WHERE Cod_vuelo='"+numero+"' AND Fecha='"+fechaV+"' AND Aeropuerto_origen ='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND Aeropuerto_destino ='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesVuelta,v);
 						        	tableClasesVuelta.setVisible(false);
 						}
+						
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 						JOptionPane.showMessageDialog(new JFrame(),
@@ -441,8 +443,15 @@ public class ReservasGUI {
 	        	String llegada=(String) tableVuelosIda.getValueAt(rowIda,4);
 	        	Time h_llegada= (Time) tableVuelosIda.getValueAt(rowIda,5);
 	        	String modelo=(String) tableVuelosIda.getValueAt(rowIda,6);
-	        	m.refrescarTabla("SELECT DISTINCT CLASE,Asientos_disponibles,PRECIO FROM VUELOS_DISPONIBLES WHERE Cod_vuelo='"+numero+"' AND Fecha='"+fechaS+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesIda,v);}
-        		tableClasesIda.setVisible(false);
+	        	m.refrescarTabla("SELECT DISTINCT CLASE,Asientos_disponibles,PRECIO FROM VUELOS_DISPONIBLES WHERE Cod_vuelo='"+numero+"' AND Fecha='"+fechaS+"' AND CIUDAD_ORIGEN='"+salida+"' AND HORA_SALIDA='"+h_salida+"' AND CIUDAD_DESTINO='"+llegada+"' AND HORA_LLEGADA='"+h_llegada+"' AND MODELO_AVION='"+modelo+"';",tableClasesIda,v);
+	        	
+	        	
+			
+			
+			}
+        		
+			
+			
 
 		}
 		
@@ -456,8 +465,8 @@ public class ReservasGUI {
 		public void actionPerformed(ActionEvent arg0) {
 			//tableVuelosIda.setVisible(false);
 			//tableClasesIda.setVisible(false);
-			tableVuelosVuelta.setVisible(false);
-			tableClasesVuelta.setVisible(false);
+			//tableVuelosVuelta.setVisible(false);
+			//tableClasesVuelta.setVisible(false);
             String origen = (String) comboOrigen.getSelectedItem();
             String destino = (String) comboDestino.getSelectedItem();
 
